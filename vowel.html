@@ -1,0 +1,16 @@
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main()
+{
+	char s[100];
+	scanf("%s",s);
+	int count=0,i;
+	for (i=0; i<strlen(s);i++){
+		if(toupper(s[i])== 'A' || toupper(s[i])== 'E' || toupper(s[i])== 'I' || toupper(s[i])== 'O' || toupper(s[i])== 'U' ){
+			count++;
+		}
+	}
+	printf("Vowels : %d\n",count);
+	printf("Consonants : %d",strlen(s)-count);
+}
