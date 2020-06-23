@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<conio.h>
+struct Node{
+	int Data;
+	struct Node *Next;
+}*S,*L,*C,*P;
+//S-Start L-Last P-Previous C-Current
+void Insert();
+void Delete();
+void Display();
+int main()
+{
+	int x;
+	S = L = C = P = NULL;
+	while(1){
+		system("cls");
+		printf("\nSingleLinked List");
+		printf("\n1.Insert");
+		printf("\n2.Delete");
+		printf("\n3.Display");
+		printf("\n4.Exit");
+		printf("\nEnter your choice: ");
+		scanf("%d",&x);
+		switch(x){
+			case 1 : Insert();
+					 break;
+			case 2: Delete();
+					 break;
+			case 3 : Display();
+					 break;
+			case 4 : printf("\n Program is terminating");
+					 break;
+		}
+	}
+}
+void Insert(){
+	//1.Alloacte memory for new node
+	//2.Assign the value for data node
+	//3.Make the next field of new node points to null
+	//4.If S and L both points to NULL,point New Node to S and L
+	struct Node *nn;
+	nn = (struct Node *)malloc(sizeof(struct Node));
+	printf("\nEnter the value: ");
+	scanf("%d",&nn->Data);
+	nn->Next = NULL;
+	if(S==NULL){
+		S=L=nn;
+	}
+	else{
+		nn->Next=S;
+		S=nn;
+	}
+	printf("\n Node is inserted");
+	getch();
+}
+void Delete(){
+}
+void Display(){
+	if(S==NULL){
+		printf("It is empty");
+		getch();
+	}
+	else
+	{
+		printf("\n Nodes in Linked list : ");
+		for(C=S;C!=NULL;C=C->Next)
+		{
+			printf("%d ",C->Data);
+		}	
+	}
+	getch();
+}
+
