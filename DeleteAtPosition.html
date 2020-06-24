@@ -1,0 +1,137 @@
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<conio.h>
+struct Node{
+	int Data;
+	struct Node *Next;
+}*S,*L,*C,*P;
+
+void insertNode();
+void deleteNode();
+void display();
+int sizepfLinkedList();
+
+int main(){
+	int x;
+	S = L = C = P = NULL;
+	while(1){
+		printf("\n Single Linked List");
+		printf("\n 1. Insert ");
+		printf("\n 2. Delete ");
+		printf("\n 3. Display ");
+		printf("\n 4. Exit");
+		printf("\n Enter your choice : ");
+		scanf("%d",&x);
+		switch(x){
+			case 1: insertNode();
+			break;
+			case 2: deleteNode();
+			break;
+			case 3: display();
+			break;
+			case 4: printf("\n Program is Terminating...");
+			return 0;
+			break;
+		}
+	}
+	return 0;
+}
+void insertNode(){
+	int pos,i,len;
+	struct Node *nn;
+	nn = (struct Node *)malloc(sizeof(struct Node));
+	printf("\n Enter the value :");
+	scanf("%d",&nn->Data);
+	nn->Next = NULL;
+	if(S == NULL){
+		S = L = nn;
+	}
+	else{
+		printf("\n Enter Position of the Node ");
+		scanf("%d",&pos);
+		len = sizepfLinkedList();
+		// Here i need to find the length of the list
+		if(pos>len){
+			printf("\n You can't insert Node because of Length");
+		}
+		else{
+			if(pos == 1){
+			nn->Next = S;
+			S = nn;
+			}
+			else{
+				for(C=S,i=1;i<pos;P=C,C=C->Next,i++);
+				nn->Next = C;
+				P->Next = nn;
+			}
+		}
+	}
+	printf("\n New node is inserted...");
+	getch();
+}
+void deleteNode(){
+	int n;
+	if(S==NULL){
+		printf("\n Single Linked List is empty");
+	}
+	else{
+		printf("\n Enter a value for delete: ");
+		scanf("%d",&n);
+		//Single Node 
+		if(S->Next == NULL && S->Data == n){
+			S = L = NULL;
+		}
+		else if(n==S->Data){
+			C = S;
+			S = S->Next;
+			C->Next = NULL;
+			C = NULL;
+		}
+		else if(n==L->Data){
+			for(C=S;C!=L;P=C,C=C->Next);
+			L = P;
+			P->Next = NULL;
+			C = NULL;
+			P = NULL;
+		}
+		else{
+			for(C=S;C!=NULL && C->Data!=n;P=C,C=C->Next);
+			if(C==NULL){
+				printf("\n Not found");
+				return;
+			}
+			else{
+				P->Next = C->Next;
+				C->Next = NULL;
+				C = NULL;
+			}
+		}
+		printf("\n Node is deleted...");
+		getch();
+	}	
+}
+void display(){
+	if(S == NULL){
+		printf("\n Single Linked List empty");
+	}
+	else{
+		for(C=S;C!=NULL;C=C->Next){
+			printf("%d ",C->Data);
+		}
+		getch();
+	}
+}
+int sizepfLinkedList(){
+	int len=0;
+	if(S==NULL){
+		len = 0;
+		return len;
+	}
+	else{
+		for(C=S;C!=NULL;C=C->Next){
+			len++;
+		}
+		return len;
+	}
+}

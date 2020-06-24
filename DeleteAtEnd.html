@@ -1,0 +1,120 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<conio.h>
+struct Node{
+	int Data;
+	struct Node *Next;
+}*S,*L,*C,*P;
+//S-Start L-Last P-Previous C-Current
+void Insert();
+void Delete();
+void Display();
+int sizeofLinkedList();
+int main()
+{
+	int x;
+	S = L = C = P = NULL;
+	while(1){
+		system("cls");
+		printf("\nSingleLinked List");
+		printf("\n1.Insert");
+		printf("\n2.Delete");
+		printf("\n3.Display");
+		printf("\n4.Exit");
+		printf("\nEnter your choice: ");
+		scanf("%d",&x);
+		switch(x){
+			case 1 : Insert();
+					 break;
+			case 2 : Delete();
+					 break;
+			case 3 : Display();
+					 break;
+			case 4 : printf("\n Program is terminating");
+					 break;
+		}
+	}
+}
+void Insert(){
+	//1.Alloacte memory for new node
+	//2.Assign the value for data node
+	//3.Make the next field of new node points to null
+	//4.If S and L both points to NULL,point New Node to S and L
+	int pos,i=1,len;
+	struct Node *nn;
+	nn = (struct Node *)malloc(sizeof(struct Node));
+	printf("\nEnter the value: ");
+	scanf("%d",&nn->Data);
+	nn->Next = NULL;
+	if(S==NULL){
+		S=L=nn;
+	}
+	else{
+		printf("Enter the position : ");
+		scanf("%d",&pos);
+		len=sizeofLinkedList();
+		if(pos>len){
+			printf("\n You cannot insert the node");
+		}
+		else{
+		if(pos==1){
+			nn->Next=S;
+			S=nn;
+		}
+		else{
+			for(C=S,i=1;i<pos;P=C,C=C->Next++,i++);
+			nn->Next=C;
+			P->Next=nn;
+		}
+	}
+	}
+	printf("\n New Node is inserted");
+	getch();
+}
+void Delete(){
+	if(S==NULL){
+		printf("\n Linked List is empty");
+	}
+	else{
+		if(S->Next==NULL){
+			S=L=NULL;
+		}
+		else{
+			for(C=S;C!=L;P=C,C=C->Next);
+			L = P;
+			P->Next = NULL;
+			P = NULL;
+			C = NULL;
+		}
+		printf("Node is Deleted at the end of the list");
+	}
+}
+void Display(){
+	if(S==NULL){
+		printf("Linked List is empty");
+		getch();
+	}
+	else
+	{
+		printf("\n Nodes in Linked list : ");
+		for(C=S;C!=NULL;C=C->Next)
+		{
+			printf("%d ",C->Data);
+		}	
+	}
+	getch();
+}
+int sizeofLinkedList()
+{
+	int len=0;
+	if(S==NULL){
+		len=0;
+		return len;
+	}
+	else{
+		for(C=S;C!=NULL;C=C->Next){
+			len++;
+		}
+		return len;
+	}
+}
