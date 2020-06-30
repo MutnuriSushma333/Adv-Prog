@@ -1,0 +1,38 @@
+void insert_location(struct link *node)
+{
+	int node_no=1,insert_no,flag=0,count;
+	node=start->next;
+	ptr=start;
+	count=i;
+	printf("\n Enter position where you want to insert new node:-");
+	scanf("%d",&insert_no);
+ 
+	while(count)
+	{
+		if(node_no==insert_no)
+		{
+			new1=(struct link *)malloc(sizeof(struct link));
+			printf("\n Insert data for new node:-");
+			scanf("%d",&new1->data);
+			ptr->next=new1;
+			new1->next=node;
+			flag=1;
+			break;
+		}
+		else
+		{
+			ptr=ptr->next;
+			node=node->next;
+		}
+		node_no++;
+		count--;
+	}
+	if(flag==0)
+	{
+		printf("\n Position not found");
+	}
+	else
+	{
+		i++;
+    }
+}
